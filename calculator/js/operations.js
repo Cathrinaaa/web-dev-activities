@@ -1,75 +1,98 @@
-function plus() {
-    const num1 = document.getElementById('display1').value;
-    const num2 = document.getElementById('display2').value;
-    const ope = document.getElementById('operator').value="+";
-    let ans;
-    
-    if (ope == "+") {
-        ans = Number(num1) + Number(num2);
-        document.getElementById('display2').value=ans;
-        document.getElementById('display1').value="";
-    }
-    
-    
-}
-function minus() {
-    const ope = document.getElementById('operator').value="-";
-    const num1 = document.getElementById('display1').value;
-    const num2 = document.getElementById('display2').value;
-    
-    let ans;
-    if (ope == "-") {
-        ans = Number(num1) - Number(num2);
-        document.getElementById('display2').value=ans;
-        document.getElementById('display1').value="";
-        
-        
-    }
-}
-function times() {
-    const ope = document.getElementById('operator').value="x";
-    const num1 = document.getElementById('display1').value;
-    const num2 = document.getElementById('display2').value;
-    let ans;
-    if (ope == "x") {
-        ans = Number(num1) * Number(num2);
-        document.getElementById('display2').value=ans;
-        document.getElementById('display1').value="";
-    }
-}
-function divide() {
-    const ope = document.getElementById('operator').value="/";
-    const num1 = document.getElementById('display1').value;
-    const num2 = document.getElementById('display2').value;
+function sum() {
+    const display1 = document.getElementById('display1').value;
+    const display2 = document.getElementById('display2').value;
+    const operator = document.getElementById('operator').value;
 
-    let ans;
-    if (ope == "/") {
-        ans = Number(num2) / Number(num1);
-        document.getElementById('display2').value=ans;
-        document.getElementById('display1').value="";
-        
+    if (display2 !== "") {
+        let answer = calculate(Number(display2), Number(display1), operator || "+");
+        document.getElementById('display2').value = answer;
+    } else {
+        document.getElementById('display2').value = display1;
+    }
+
+    document.getElementById('display1').value = "0";
+    document.getElementById('operator').value = '+';
+}
+
+function sub() {
+    const display1 = document.getElementById('display1').value;
+    const display2 = document.getElementById('display2').value;
+    const operator = document.getElementById('operator').value;
+
+    if (display2 !== "") {
+        let answer = calculate(Number(display2), Number(display1), operator || "-");
+        document.getElementById('display2').value = answer;
+    } else {
+        document.getElementById('display2').value = display1;
+    }
+
+    document.getElementById('display1').value = "0";
+    document.getElementById('operator').value = '-';
+}
+
+function mul() {
+    const display1 = document.getElementById('display1').value;
+    const display2 = document.getElementById('display2').value;
+    const operator = document.getElementById('operator').value;
+
+    if (display2 !== "") {
+        let answer = calculate(Number(display2), Number(display1), operator || "*");
+        document.getElementById('display2').value = answer;
+    } else {
+        document.getElementById('display2').value = display1;
+    }
+
+    document.getElementById('display1').value = "0";
+    document.getElementById('operator').value = '*';
+}
+
+function div() {
+    const display1 = document.getElementById('display1').value;
+    const display2 = document.getElementById('display2').value;
+    const operator = document.getElementById('operator').value;
+
+    if (display2 !== "") {
+        let answer = calculate(Number(display2), Number(display1), operator || "/");
+        document.getElementById('display2').value = answer;
+    } else {
+        document.getElementById('display2').value = display1;
+    }
+
+    document.getElementById('display1').value = "0";
+    document.getElementById('operator').value = '/';
+}
+
+function dot() {
+    const num = document.getElementById('display1').value;
+    if (!num.includes(".")) {
+        document.getElementById('display1').value = num + ".";
     }
 }
-function equal(){
-    const num1 = document.getElementById('display1').value;
-    const num2 = document.getElementById('display2').value;
-    const ope = document.getElementById('operator').value;
 
-    let ans;
-    if (ope == "+"){
-        ans = Number(num2) + Number(num1);    
+function equal() {
+    const display1 = document.getElementById('display1').value;
+    const display2 = document.getElementById('display2').value;
+    const operator = document.getElementById('operator').value;
+
+    if (display2 !== "" && operator !== "") {
+        let answer = calculate(Number(display2), Number(display1), operator);
+        document.getElementById('display1').value = answer;
+        document.getElementById('display2').value = "";
+        document.getElementById('operator').value = "";
     }
-    if (ope == "-"){
-        ans = Number(num2) - Number(num1);
+}
+
+function calculate(num1, num2, operator) {
+    switch (operator) {
+        case "+":
+            return num1 + num2;
+        case "-":
+            return num1 - num2;
+        case "*":
+            return num1 * num2;
+        case "/":
+            return num1 / num2;
+        default:
+            return num2;
     }
-    if (ope == "x"){
-        ans = Number(num2) * Number(num1);
-    }
-    if (ope == "/"){
-        ans = Number(num2) / Number(num1);
-    }
-    
-    document.getElementById('display1').value=ans;
-    document.getElementById('display2').value="";
-    document.getElementById('operator').value="";
-};
+}
